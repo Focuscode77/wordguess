@@ -43,9 +43,12 @@ function winLose()
         
 }
 }
+
 // User Guesses
 document.onkeyup = function(event){
 userGusses = event.key;
+
+
 // checking if letter exist inside of the word.
  if(urbanCity.indexOf(userGusses) > -1 ){
      for( var i=0; i < urbanCity.length; i++){
