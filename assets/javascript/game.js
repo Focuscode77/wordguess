@@ -1,10 +1,10 @@
 // Golabal Vaiables
-var urbanCitiesArr =["new york", "philadlephia", "dallas", "atlanta", "washington"];
+var urbanCitiesArr =["new york", "portland", "baltimore", "austin","phoenix"];
 var winsScore = 0;
 var lossScore=0;
-var wrongLetter=[];
 var guessesLeft=9;
-var underScores=[]
+var wrongLetter=[];
+var underScore=[]
 var userGusses=[];
 
  var urbanCity;
@@ -12,34 +12,40 @@ var userGusses=[];
  
  var urbanCity =  Math.floor(Math.random() * urbanCitiesArr.length);
 //  DOM 
-var wordblank = document.getElementById('word-blanks');
+var docUnderScore = document.getElementById('underscore');
 var winsScore = document.getElementById('Wins');
 var lossScore = document.getElementById("Loses");
  var choosenWord = urbanCitiesArr[urbanCity];
+//  function to put array in underscores
  
-  var createUnderscore = () =>{
+var createUnderscore = () =>{
   for(var i=0; i < choosenWord.length; i++){
       
-      underScores.push('_');
+      underScore.push('_');
       
       
   }
-     return underScores;
+     return underScore;
 
   }
  console.log(createUnderscore());
+//  Listens to event puts code on the page
 document.addEventListener('keypress', (event) => {
     var x = event.which || event.keyCode; 
     var keyword = String.fromCharCode(event.keyCode);
+   
+   
     // if users guess is right
      if(choosenWord.indexOf(keyword) > -1){
-    // add to Users Gusses
+    
+    
+        // add to Users Gusses
      userGusses.push(keyword);
-     underScores[choosenWord.indexOf(keyword)] = keyword;
-     wordblank[i].innerHTML = underScores.join('');
+     underScore[choosenWord.indexOf(keyword)] = keyword;
+     docUnderScore.innerHTML = underScore.join('');
       userGusses.innerHTML = winsScore;
     
-      if (underScores.join('')=== choosenWord) {
+      if (underScore.join('')=== choosenWord) {
          alert("You win");
          
     }
@@ -55,7 +61,16 @@ document.addEventListener('keypress', (event) => {
 });
 
 
- // Function to Start Game
+ 
+
+
+
+
+
+
+
+
+// Function to Start Game
 //  function startGame(){
 
 
