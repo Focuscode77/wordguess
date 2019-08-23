@@ -1,67 +1,94 @@
 // Golabal Vaiables
-var urbanCitiesArr =["new york", "portland", "baltimore", "austin","phoenix"];
+var urbanCitiesArr = ["new york", "portland", "baltimore", "austin", "phoenix"];
 var winsScore = 0;
-var lossScore=0;
-var guessesLeft=9;
-var wrongLetter=[];
-var underScore=[]
-var userGusses=[];
+var lossScore = 0;
+var guessesLeft = 9;
+var wrongLetter = [];
+var underScore = []
+var userGusses = [];
+var mySound;
 
- var urbanCity;
- 
- 
- var urbanCity =  Math.floor(Math.random() * urbanCitiesArr.length);
+var urbanCity;
+urbanCity = Math.floor(Math.random() * urbanCitiesArr.length);
+
+var choosenWord = urbanCitiesArr[urbanCity];
+
 //  DOM 
 var docUnderScore = document.getElementById('underscore');
 var winsScore = document.getElementById('Wins');
 var lossScore = document.getElementById("Loses");
- var choosenWord = urbanCitiesArr[urbanCity];
 //  function to put array in underscores
- 
-var createUnderscore = () =>{
-  for(var i=0; i < choosenWord.length; i++){
-      
-      underScore.push('_');
-      
-      
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
   }
-     return underScore;
+  
+  
+  
+  
+  
+var createUnderscore = () => {
+    for (var i = 0; i < choosenWord.length; i++) {
+        
+        
+        underScore[i] = " _";
 
-  }
- console.log(createUnderscore());
+
+    }
+    return underScore;
+
+}
+console.log(createUnderscore());
 //  Listens to event puts code on the page
 document.addEventListener('keypress', (event) => {
-    var x = event.which || event.keyCode; 
+    var x = event.which || event.keyCode;
     var keyword = String.fromCharCode(event.keyCode);
-   
-   
+
+
     // if users guess is right
-     if(choosenWord.indexOf(keyword) > -1){
-    
-    
+    if (choosenWord.indexOf(keyword) > -1) {
+
+
         // add to Users Gusses
-     userGusses.push(keyword);
-     underScore[choosenWord.indexOf(keyword)] = keyword;
-     docUnderScore.innerHTML = underScore.join('');
-      userGusses.innerHTML = winsScore;
-    
-      if (underScore.join('')=== choosenWord) {
-         alert("You win");
-         
+        userGusses.push(keyword);
+        underScore[choosenWord.indexOf(keyword)] = keyword;
+        docUnderScore.innerHTML = underScore.join('');
+        userGusses.innerHTML = winsScore;
+
+        if (underScore.join('') === choosenWord) {
+            var mySound;
+            alert("You win");
+           mySound = new sound("ChasingPavements.mp3");
+            // mySound = new sound("ChasingPavements.mp3");
+            mySound.play();
+
+            mySound = new sound("assets/javascript/ChasingPavements.mp3");
+
+        }
+
+        else {
+            wrongLetter.push(keyword);
+            console.log(wrongLetter);
+        }
+
     }
-        
-     else{
-        wrongLetter.push(keyword);
-        console.log(wrongLetter);
-    }
-          
-      } 
-    
 
 });
 
+ // Update the game state with the guess
 
- 
+
+
 
 
 
@@ -76,17 +103,17 @@ document.addEventListener('keypress', (event) => {
 
 //   Print underscores to screen
     // document.getElementById('word-blanks').textContent =underScores.join(" ");
-    
+
 //    Reset 
 //    wrongLetter=[];
 //    guessesLeft=9;
-   
+
 
    //HTML Print
 //    document.getElementById('guesses-left').textContent = guessesLeft;
 
 //  }
- 
+
 // }
 // Win or lose function
 // function winLose()
@@ -97,7 +124,7 @@ document.addEventListener('keypress', (event) => {
     // }
     // else if (guessesLeft===0){
         // alert('Loser');
-        
+
 // }
 // }
 
@@ -122,9 +149,8 @@ document.addEventListener('keypress', (event) => {
     //  wrongLetter.push(userGusses);
     //  guessesLeft--;
     //  winLose();
-     
-     
+
+
 //  }
 // }
 // startGame();
-
